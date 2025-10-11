@@ -1,0 +1,237 @@
+@import "https://unpkg.com/open-props/easings.min.css";
+
+/* ===============================
+   Theme tokens (light base)
+   =============================== */
+:root {
+  --bg: #f5f7fb;
+  --ink: #111827;
+  --muted: #4b5563;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --link: #1e40af;
+  --link-hover: #0b3ea9;
+  --accent: #2f6fa8;          /* title color (light) */
+  --radius: 16px;
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  --focus: 3px solid #1e40af;
+
+  /* icon colors for the toggle */
+  --icon-fill: #111827;
+  --icon-fill-hover: #0b3ea9;
+}
+
+/* System dark fallback if no explicit choice */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --ink: #e5e7eb;
+    --muted: #a3adc2;
+    --card: #0f172a;
+    --border: #1f2a3b;
+    --link: #93c5fd;
+    --link-hover: #bfdbfe;
+    --shadow: 0 10px 36px rgba(0, 0, 0, 0.5);
+    --focus: 3px solid #93c5fd;
+    --accent: #ffd343;        /* Python yellow for title in dark */
+    --icon-fill: #e5e7eb;
+    --icon-fill-hover: #bfdbfe;
+  }
+}
+
+/* Explicit overrides via data-theme on <html> */
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f5f7fb;
+  --ink: #111827;
+  --muted: #4b5563;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --link: #1e40af;
+  --link-hover: #0b3ea9;
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  --focus: 3px solid #1e40af;
+  --accent: #2f6fa8;
+  --icon-fill: #111827;
+  --icon-fill-hover: #0b3ea9;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1220;
+  --ink: #e5e7eb;
+  --muted: #a3adc2;
+  --card: #0f172a;
+  --border: #1f2a3b;
+  --link: #93c5fd;
+  --link-hover: #bfdbfe;
+  --shadow: 0 10px 36px rgba(0, 0, 0, 0.5);
+  --focus: 3px solid #93c5fd;
+  --accent: #ffd343;          /* Python yellow */
+  --icon-fill: #e5e7eb;
+  --icon-fill-hover: #bfdbfe;
+}
+
+/* ===============================
+   Layout
+   =============================== */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  line-height: 1.8;
+  display: grid;
+  place-items: start center;
+  padding: 16px;
+  background-image:
+    radial-gradient(closest-side, rgba(55,118,171,0.06), rgba(55,118,171,0) 80%),
+    repeating-linear-gradient(135deg, rgba(225,29,72,0.04) 0 12px, rgba(225,29,72,0) 12px 24px);
+  background-size: 280px 280px, 24px 24px;
+  background-position: 10% -40px, 0 0;
+}
+
+.wrap {
+  width: min(52rem, 96vw);
+  margin-top: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(20px, 4vw, 44px);
+  position: relative;
+}
+
+/* ===============================
+   Sun/Moon toggle styles (your component)
+   =============================== */
+.theme-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--icon-fill);
+  cursor: pointer;
+}
+.theme-toggle:focus-visible { outline: var(--focus); }
+
+.sun-and-moon > :is(.moon, .sun, .sun-beams) {
+  transform-origin: center;
+}
+.sun-and-moon > :is(.moon, .sun) { fill: var(--icon-fill); }
+.theme-toggle:is(:hover, :focus-visible) > .sun-and-moon > :is(.moon, .sun) {
+  fill: var(--icon-fill-hover);
+}
+.sun-and-moon > .sun-beams {
+  stroke: var(--icon-fill);
+  stroke-width: 2px;
+}
+.theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun-beams {
+  stroke: var(--icon-fill-hover);
+}
+[data-theme="dark"] .sun-and-moon > .sun { transform: scale(1.75); }
+[data-theme="dark"] .sun-and-moon > .sun-beams { opacity: 0; }
+[data-theme="dark"] .sun-and-moon > .moon > circle { transform: translateX(-7px); }
+@supports (cx: 1) {
+  [data-theme="dark"] .sun-and-moon > .moon > circle { cx: 17; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon > .sun { transition: transform .5s var(--ease-elastic-3); }
+  .sun-and-moon > .sun-beams { transition: transform .5s var(--ease-elastic-4), opacity .5s var(--ease-3); }
+  .sun-and-moon .moon > circle { transition: transform .25s var(--ease-out-5); }
+  @supports (cx: 1) { .sun-and-moon .moon > circle { transition: cx .25s var(--ease-out-5); } }
+  [data-theme="dark"] .sun-and-moon > .sun { transition-timing-function: var(--ease-3); transition-duration: .25s; transform: scale(1.75); }
+  [data-theme="dark"] .sun-and-moon > .sun-beams { transition-duration: .15s; transform: rotateZ(-25deg); }
+  [data-theme="dark"] .sun-and-moon > .moon > circle { transition-duration: .5s; transition-delay: .25s; }
+}
+
+/* ===============================
+   Content
+   =============================== */
+h1 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-align: center;
+  font-size: clamp(1.9rem, 2.4vw + 1rem, 2.6rem);
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.flag {
+  width: 36px;
+  height: 26px;
+  flex: 0 0 auto;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  object-fit: cover;
+}
+
+.tagline {
+  text-align: center;
+  color: var(--muted);
+  margin: 0.35rem 0 1.25rem;
+  font-size: 1rem;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 1.5rem 0 1rem;
+}
+
+p { margin: 1rem 0; }
+strong { font-weight: 700; }
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0 1.4rem;
+  display: grid;
+  gap: 0.6rem;
+}
+.links a {
+  display: block;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.4));
+}
+html[data-theme="dark"] .links a {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.03)
+  );
+}
+
+.links a:hover {
+  border-color: var(--link);
+  box-shadow: 0 6px 16px rgba(30,64,175,.15);
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.98rem;
+  margin-top: 1.25rem;
+}
+a { color: var(--link); }
+a:hover { color: var(--link-hover); }
+a:focus-visible {
+  outline: var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}

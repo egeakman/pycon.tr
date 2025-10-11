@@ -1,0 +1,83 @@
+<!-- 
+  Disclaimer:
+  This page prioritizes vibes over maintainability.
+  Told GPT to go wild, and it did.
+  Feel free to clean it up if you want. or not.
+-->
+
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PyCon Turkey</title>
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js" defer></script>
+</head>
+<body>
+  <main class="wrap" id="content" role="main" aria-labelledby="title">
+    <button class="theme-toggle" id="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+      <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+        <mask class="moon" id="moon-mask">
+          <rect x="0" y="0" width="100%" height="100%" fill="white" />
+          <circle cx="24" cy="10" r="6" fill="black" />
+        </mask>
+        <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor" />
+        <g class="sun-beams" stroke="currentColor">
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </g>
+      </svg>
+    </button>
+
+    <h1 id="title">
+      🐍 PyCon Turkey
+      <img src="tr-flag.svg" alt="Turkey flag" class="flag" />
+    </h1>
+    <p class="tagline">A friendly placeholder</p>
+
+    <section>
+      <p><strong>English:</strong><br />
+      Hey there! 👋 This domain is being kept safe by a community member to make sure the <em>PyCon</em> name in Turkey stays in good hands.
+      PyCon Turkey is not active right now, but we hope to see it return someday. ❤️</p>
+
+      <p>While waiting for the next edition, check out these amazing Python events:</p>
+      <ul class="links">
+        <li><a href="https://www.python.org/events/python-events/">Python Events Index</a></li>
+        <li><a href="https://www.europython.eu/">EuroPython Conference</a></li>
+        <li><a href="https://tr.pycon.org/">Previous PyCon Turkey Website</a></li>
+      </ul>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section lang="tr">
+      <p><strong>Türkçe:</strong><br />
+      Merhaba! 👋 Bu alan adı, <em>PyCon</em> isminin Türkiye'de güvenli ve topluluk odaklı kalması için güvenle saklanıyor.
+      PyCon Turkey şu anda aktif değil, ama bir gün geri dönmesini umuyoruz. ❤️</p>
+
+      <p>Bir sonraki PyCon TR’yi beklerken aşağıdaki harika etkinliklere göz atabilirsiniz:</p>
+      <ul class="links">
+        <li><a href="https://www.python.org/events/python-events/">Python Etkinlikleri Dizini</a></li>
+        <li><a href="https://www.europython.eu/">EuroPython Konferansı</a></li>
+        <li><a href="https://tr.pycon.org/">Önceki PyCon Turkey Sitesi</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>
+        Maintained by <a href="https://github.com/egeakman">Ege</a>, keeping it warm for the next PyCon Turkey •
+        Contact: <a href="mailto:ege@europython.eu">ege@europython.eu</a><br />
+        Not an official PyCon Turkey site
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
