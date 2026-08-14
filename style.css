@@ -222,6 +222,17 @@ html[data-theme="dark"] .links a {
   box-shadow: 0 6px 16px rgba(30,64,175,.15);
 }
 
+.links a.highlight {
+  border-color: var(--accent);
+  border-width: 2px;
+  font-weight: 700;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, transparent), color-mix(in srgb, var(--accent) 6%, transparent));
+}
+.links a.highlight:hover {
+  border-color: var(--accent);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
 footer {
   text-align: center;
   color: var(--muted);
